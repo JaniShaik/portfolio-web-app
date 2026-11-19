@@ -1,9 +1,11 @@
+import { profile } from "@/data/profile";
 import { getSiteUrl } from "@/lib/env";
 
-// TODO: Replace placeholder values before launch.
+// TODO: Replace the placeholder description before launch.
 export const siteConfig = {
-  name: "Portfolio",
-  title: "Portfolio — Technology Leader",
+  /** Portfolio brand: header, footer, title template, `applicationName` and OG `siteName`. */
+  name: profile.name,
+  title: `${profile.name} — ${profile.headline}`,
   description:
     "Placeholder description: digital engineering, software architecture, cloud engineering, AI/GenAI and engineering leadership.",
   url: getSiteUrl(),

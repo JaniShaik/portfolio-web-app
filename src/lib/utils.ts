@@ -1,5 +1,18 @@
 import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { extendTailwindMerge } from "tailwind-merge";
+
+/**
+ * Register the custom font-size tokens from `globals.css` so tailwind-merge treats
+ * `text-label-md` etc. as font sizes rather than colours (and keeps them alongside
+ * `text-*` colour classes).
+ */
+const twMerge = extendTailwindMerge({
+  extend: {
+    theme: {
+      text: ["display", "heading", "headline-sm", "body-md", "body-sm", "label-md", "label-sm"],
+    },
+  },
+});
 
 /** Merge conditional class names, resolving Tailwind CSS conflicts (last one wins). */
 export function cn(...inputs: ClassValue[]): string {

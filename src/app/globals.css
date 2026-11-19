@@ -9,7 +9,8 @@
  *   and .dark (future-ready; toggle by adding `class="dark"` to <html>).
  * - Semantic tokens are exposed to Tailwind via `@theme inline`
  *   (e.g. bg-background, text-muted-foreground, border-border).
- * - Replace the neutral palette with values from the Google Stitch designs.
+ * - Palette, type scale and layout widths follow the Google Stitch design
+ *   system "Clinical Cobalt Monochrome" (project "Portfolio New").
  */
 
 /* Dark mode is class-based so it never activates implicitly. */
@@ -26,12 +27,12 @@
 
   /* Container widths → max-w-content, max-w-prose-narrow, max-w-wide. */
   --container-prose-narrow: 42rem; /* 672px – long-form reading */
-  --container-content: 72rem; /* 1152px – default page content */
+  --container-content: 75rem; /* 1200px – default page content (Stitch max container) */
   --container-wide: 80rem; /* 1280px – full-bleed sections */
 
   /* Spacing conventions (base unit = 0.25rem). → py-section, px-gutter … */
-  --spacing-gutter: 1rem;
-  --spacing-gutter-lg: 2rem;
+  --spacing-gutter: 1.25rem; /* Stitch margin-mobile */
+  --spacing-gutter-lg: 3rem; /* Stitch margin (desktop) */
   --spacing-section: 4rem;
   --spacing-section-lg: 6rem;
 
@@ -42,6 +43,24 @@
   --text-heading: clamp(1.875rem, 1.5rem + 1.5vw, 2.5rem);
   --text-heading--line-height: 1.2;
   --text-heading--letter-spacing: -0.015em;
+
+  /* Stitch type scale (Geist). → text-headline-sm, text-body-sm, text-label-md … */
+  --text-headline-sm: 1.125rem;
+  --text-headline-sm--line-height: 1.5rem;
+  --text-headline-sm--letter-spacing: -0.01em;
+  --text-headline-sm--font-weight: 500;
+  --text-body-md: 0.9375rem;
+  --text-body-md--line-height: 1.5rem;
+  --text-body-sm: 0.8125rem;
+  --text-body-sm--line-height: 1.25rem;
+  --text-label-md: 0.8125rem;
+  --text-label-md--line-height: 1rem;
+  --text-label-md--letter-spacing: 0.02em;
+  --text-label-md--font-weight: 500;
+  --text-label-sm: 0.6875rem;
+  --text-label-sm--line-height: 0.875rem;
+  --text-label-sm--letter-spacing: 0.04em;
+  --text-label-sm--font-weight: 500;
 }
 
 @theme inline {
@@ -80,6 +99,9 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-subtle-foreground: var(--subtle-foreground);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
   /* Border-radius conventions, all derived from --radius. */
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
@@ -92,24 +114,27 @@
 
 :root {
   color-scheme: light;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: oklch(1 0 0); /* surface-canvas #FFFFFF */
+  --foreground: oklch(0.178 0 0); /* text-primary / border-strong #111111 */
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.178 0 0);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
+  --popover-foreground: oklch(0.178 0 0);
+  --primary: oklch(0.459 0.203 261.366); /* primary #004AC6 */
+  --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.976 0 0); /* surface-subtle #F7F7F7 */
+  --muted-foreground: oklch(0.51 0 0); /* text-secondary #666666 */
+  --subtle-foreground: oklch(0.397 0.026 276.281); /* on-surface-variant #434655 */
+  --accent: oklch(0.976 0 0);
+  --accent-foreground: oklch(0.178 0 0);
+  --brand: oklch(0.546 0.215 262.881); /* primary-container (cobalt) #2563EB */
+  --brand-hover: oklch(0.488 0.217 264.376); /* accent-hover #1D4ED8 */
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --border: oklch(0.931 0 0); /* border-subtle #E8E8E8 */
+  --input: oklch(0.931 0 0);
+  --ring: oklch(0.546 0.215 262.881); /* cobalt focus ring */
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -140,6 +165,9 @@
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
+  --subtle-foreground: oklch(0.8 0 0);
+  --brand: oklch(0.546 0.215 262.881);
+  --brand-hover: oklch(0.488 0.217 264.376);
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
@@ -182,6 +210,11 @@
       @apply scroll-auto;
     }
   }
+}
+
+/* Keyboard focus indicator for text links and icon links (cobalt outline). */
+@utility focus-ring {
+  @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring;
 }
 
 /* Centered, padded page container. Usage: <div className="container-page"> */

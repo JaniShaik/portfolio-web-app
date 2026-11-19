@@ -1,3 +1,4 @@
+import { PhilosophySection } from "@/components/sections/philosophy-section";
 import { PagePlaceholder } from "@/components/shared/page-placeholder";
 import { siteConfig } from "@/lib/constants";
 import { createPageMetadata } from "@/lib/seo";
@@ -10,5 +11,10 @@ export const metadata = createPageMetadata({
 });
 
 export default function HomePage() {
-  return <PagePlaceholder title="Home" />;
+  return (
+    <>
+      <PagePlaceholder title="Home" />
+      <PhilosophySection />
+    </>
+  );
 }

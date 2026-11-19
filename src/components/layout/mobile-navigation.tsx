@@ -6,29 +6,38 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { publicRoutes } from "@/data/navigation";
+import { mainNavigation } from "@/data/navigation";
 import { cn, isActivePath } from "@/lib/utils";
 
-/** Mobile navigation drawer. Visible below the `md` breakpoint. */
+/** Navigation drawer for viewports below `xl`, where the inline header navigation is hidden. */
 export function MobileNavigation({ className }: { className?: string }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   return (
-    <div className={cn("md:hidden", className)}>
+    <div className={cn("xl:hidden", className)}>
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger
-          render={<Button variant="ghost" size="icon" aria-label="Open navigation menu" />}
+          render={
+            <Button
+              variant="ghost"
+              size="icon-lg"
+              className="rounded-xs text-foreground"
+              aria-label="Open navigation menu"
+            />
+          }
         >
-          <MenuIcon aria-hidden="true" />
+          <MenuIcon aria-hidden="true" className="size-5" />
         </SheetTrigger>
-        <SheetContent side="right">
-          <SheetHeader>
-            <SheetTitle>Navigation</SheetTitle>
+        <SheetContent side="right" className="border-l shadow-none">
+          <SheetHeader className="h-20 justify-center border-b px-5">
+            <SheetTitle className="text-label-sm tracking-wider text-muted-foreground uppercase">
+              Navigation
+            </SheetTitle>
           </SheetHeader>
-          <nav aria-label="Mobile" className="px-4">
+          <nav aria-label="Mobile" className="px-3">
             <ul className="flex flex-col gap-1">
-              {publicRoutes.map((item) => {
+              {mainNavigation.map((item) => {
                 const isActive = isActivePath(pathname, item.href);
                 return (
                   <li key={item.href}>
@@ -37,8 +46,9 @@ export function MobileNavigation({ className }: { className?: string }) {
                       aria-current={isActive ? "page" : undefined}
                       onClick={() => setOpen(false)}
                       className={cn(
-                        "block rounded-md px-3 py-2 text-base font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
-                        isActive && "bg-muted text-foreground",
+                        "flex min-h-11 items-center rounded-xs border-l-2 border-transparent px-3 text-body-md text-subtle-foreground focus-ring transition-colors hover:bg-muted hover:text-foreground",
+                        isActive &&
+                          "border-primary bg-muted font-medium text-primary hover:text-primary",
                       )}
                     >
                       {item.title}

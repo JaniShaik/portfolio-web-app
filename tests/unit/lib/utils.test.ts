@@ -10,6 +10,13 @@ describe("cn", () => {
   it("resolves conflicting Tailwind classes in favour of the last one", () => {
     expect(cn("px-2 text-sm", "px-4")).toBe("text-sm px-4");
   });
+
+  it("keeps custom font-size tokens alongside text colours", () => {
+    expect(cn("text-label-md text-subtle-foreground", "text-primary")).toBe(
+      "text-label-md text-primary",
+    );
+    expect(cn("text-label-md", "text-body-sm")).toBe("text-body-sm");
+  });
 });
 
 describe("joinUrl", () => {
