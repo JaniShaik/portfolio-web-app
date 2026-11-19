@@ -1,9 +1,15 @@
 export interface Profile {
   name: string;
+  /** Short role shown beside the brand in the header, e.g. "Enterprise AI Architect". */
+  role: string;
   headline: string;
   summary: string;
   location: string;
   email?: string;
+  /** Downloadable resume/CV served from `public/`. */
+  resume?: {
+    href: `/${string}`;
+  };
   avatar?: {
     src: string;
     alt: string;

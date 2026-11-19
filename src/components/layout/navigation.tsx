@@ -5,13 +5,13 @@ import { usePathname } from "next/navigation";
 import { mainNavigation } from "@/data/navigation";
 import { cn, isActivePath } from "@/lib/utils";
 
-/** Desktop primary navigation. Hidden below the `md` breakpoint. */
+/** Desktop primary navigation. Hidden below the `xl` breakpoint, as in the Stitch design. */
 export function Navigation({ className }: { className?: string }) {
   const pathname = usePathname();
 
   return (
-    <nav aria-label="Main" className={cn("hidden md:block", className)}>
-      <ul className="flex items-center gap-1">
+    <nav aria-label="Main" className={cn("hidden xl:block", className)}>
+      <ul className="flex items-center gap-4">
         {mainNavigation.map((item) => {
           const isActive = isActivePath(pathname, item.href);
           return (
@@ -20,8 +20,8 @@ export function Navigation({ className }: { className?: string }) {
                 href={item.href}
                 aria-current={isActive ? "page" : undefined}
                 className={cn(
-                  "rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none",
-                  isActive && "text-foreground",
+                  "border-b border-transparent py-1 text-label-md text-subtle-foreground focus-ring transition-colors hover:text-foreground",
+                  isActive && "border-primary text-primary hover:text-primary",
                 )}
               >
                 {item.title}
