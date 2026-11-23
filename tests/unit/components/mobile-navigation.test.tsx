@@ -4,7 +4,9 @@ import { describe, expect, it, vi } from "vitest";
 import { MobileNavigation } from "@/components/layout/mobile-navigation";
 import { mainNavigation } from "@/data/navigation";
 
-vi.mock("next/navigation", () => ({ usePathname: () => "/about" }));
+const router = vi.hoisted(() => ({ push: vi.fn() }));
+
+vi.mock("next/navigation", () => ({ usePathname: () => "/about", useRouter: () => router }));
 
 describe("MobileNavigation", () => {
   it("lists the header navigation and marks the current page", async () => {
@@ -40,6 +42,36 @@ describe("MobileNavigation", () => {
     await waitFor(() => {
       expect(screen.queryByRole("navigation", { name: "Mobile" })).not.toBeInTheDocument();
     });
+  });
+
+  it("follows anchor links only after the drawer has fully closed", async () => {
+    router.push.mockClear();
+    const user = userEvent.setup();
+    render(<MobileNavigation />);
+
+    await user.click(screen.getByRole("button", { name: "Open navigation menu" }));
+    const nav = await screen.findByRole("navigation", { name: "Mobile" });
+    await user.click(within(nav).getByRole("link", { name: "Philosophy" }));
+
+    await waitFor(() => {
+      expect(screen.queryByRole("navigation", { name: "Mobile" })).not.toBeInTheDocument();
+    });
+    await waitFor(() => expect(router.push).toHaveBeenCalledExactlyOnceWith("/#philosophy"));
+  });
+
+  it("leaves regular page links to the default Link navigation", async () => {
+    router.push.mockClear();
+    const user = userEvent.setup();
+    render(<MobileNavigation />);
+
+    await user.click(screen.getByRole("button", { name: "Open navigation menu" }));
+    const nav = await screen.findByRole("navigation", { name: "Mobile" });
+    await user.click(within(nav).getByRole("link", { name: "Projects" }));
+
+    await waitFor(() => {
+      expect(screen.queryByRole("navigation", { name: "Mobile" })).not.toBeInTheDocument();
+    });
+    expect(router.push).not.toHaveBeenCalled();
   });
 
   it("closes on Escape and returns focus to the menu button", async () => {

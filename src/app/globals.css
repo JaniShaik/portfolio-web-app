@@ -45,6 +45,25 @@
   --text-heading--letter-spacing: -0.015em;
 
   /* Stitch type scale (Geist). → text-headline-sm, text-body-sm, text-label-md … */
+  --text-headline-display: 4rem;
+  --text-headline-display--line-height: 4.25rem;
+  --text-headline-display--letter-spacing: -0.04em;
+  --text-headline-display--font-weight: 600;
+  --text-headline-lg: 2.25rem;
+  --text-headline-lg--line-height: 2.75rem;
+  --text-headline-lg--letter-spacing: -0.03em;
+  --text-headline-lg--font-weight: 600;
+  --text-headline-md: 1.5rem;
+  --text-headline-md--line-height: 2rem;
+  --text-headline-md--letter-spacing: -0.02em;
+  --text-headline-md--font-weight: 500;
+  --text-headline-lg-mobile: 1.75rem;
+  --text-headline-lg-mobile--line-height: 2.125rem;
+  --text-headline-lg-mobile--letter-spacing: -0.02em;
+  --text-headline-lg-mobile--font-weight: 600;
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.75rem;
+  --text-body-lg--letter-spacing: -0.01em;
   --text-headline-sm: 1.125rem;
   --text-headline-sm--line-height: 1.5rem;
   --text-headline-sm--letter-spacing: -0.01em;
@@ -102,6 +121,7 @@
   --color-subtle-foreground: var(--subtle-foreground);
   --color-brand: var(--brand);
   --color-brand-hover: var(--brand-hover);
+  --color-foreground-hover: var(--foreground-hover);
   /* Border-radius conventions, all derived from --radius. */
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
@@ -116,6 +136,7 @@
   color-scheme: light;
   --background: oklch(1 0 0); /* surface-canvas #FFFFFF */
   --foreground: oklch(0.178 0 0); /* text-primary / border-strong #111111 */
+  --foreground-hover: oklch(0 0 0); /* hover state for foreground-filled actions #000000 */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.178 0 0);
   --popover: oklch(1 0 0);
@@ -155,6 +176,7 @@
   color-scheme: dark;
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
+  --foreground-hover: oklch(1 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);

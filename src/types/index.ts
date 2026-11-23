@@ -1,4 +1,5 @@
 export type * from "./experience";
+export type * from "./home";
 export type * from "./profile";
 export type * from "./project";
 

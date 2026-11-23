@@ -17,6 +17,18 @@ describe("cn", () => {
     );
     expect(cn("text-label-md", "text-body-sm")).toBe("text-body-sm");
   });
+
+  it.each(["headline-display", "headline-lg", "headline-md", "headline-lg-mobile", "body-lg"])(
+    "treats text-%s as a font size, not a colour",
+    (token) => {
+      expect(cn(`text-${token}`, "text-foreground")).toBe(`text-${token} text-foreground`);
+      expect(cn("text-foreground", `text-${token}`)).toBe(`text-foreground text-${token}`);
+      expect(cn("text-body-sm", `text-${token}`)).toBe(`text-${token}`);
+      expect(cn(`text-${token}`, "md:text-headline-display")).toBe(
+        `text-${token} md:text-headline-display`,
+      );
+    },
+  );
 });
 
 describe("joinUrl", () => {
@@ -40,5 +52,11 @@ describe("isActivePath", () => {
     expect(isActivePath("/projects", "/projects")).toBe(true);
     expect(isActivePath("/projects/case-study", "/projects")).toBe(true);
     expect(isActivePath("/projects-archive", "/projects")).toBe(false);
+  });
+
+  it("never marks in-page anchors as the current page", () => {
+    expect(isActivePath("/", "/#philosophy")).toBe(false);
+    expect(isActivePath("/experience", "/#philosophy")).toBe(false);
+    expect(isActivePath("/projects", "/#philosophy")).toBe(false);
   });
 });
