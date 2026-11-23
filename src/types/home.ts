@@ -61,3 +61,62 @@ export interface BackgroundImpactContent {
   journey: readonly JourneyStage[];
   link: CallToAction;
 }
+
+/** Shared heading content for homepage sections: eyebrow, title and optional intro. */
+export interface SectionHeadingContent {
+  /** Numbered overline, e.g. "02 / Core Capabilities". */
+  eyebrow: string;
+  title: string;
+  intro?: string;
+}
+
+export type CapabilityIcon =
+  "architecture" | "modernization" | "backend" | "ai" | "cloud" | "leadership";
+
+export interface Capability {
+  title: string;
+  description: string;
+  icon: CapabilityIcon;
+  /** Representative technologies and practices, shown as tags. */
+  tags: readonly string[];
+}
+
+export interface CoreCapabilitiesContent extends SectionHeadingContent {
+  items: readonly Capability[];
+}
+
+export interface CaseStudy {
+  /** Short category shown in the card overline, e.g. "Financial Systems". */
+  category: string;
+  title: string;
+  /** Headline outcome. Only use results stated in the resume or profile. */
+  impact: string;
+  summary: string;
+  technologies: readonly string[];
+  /** Business domain shown in the card footer. */
+  domain: string;
+  /** Detailed case study route; omit until the page exists. */
+  href?: `/${string}`;
+}
+
+export interface CaseStudiesContent extends SectionHeadingContent {
+  items: readonly CaseStudy[];
+}
+
+/**
+ * A Writing & Perspectives card: a topic today, or a published article once it has an
+ * `href` (and optional `meta`, e.g. reading time). Never add an `href` for unpublished work.
+ */
+export interface InsightItem {
+  category: string;
+  title: string;
+  summary: string;
+  href?: string;
+  meta?: string;
+}
+
+export interface InsightsContent extends SectionHeadingContent {
+  items: readonly InsightItem[];
+  /** "View all" link; rendered top-right on desktop and as a full-width button on mobile. */
+  allLink?: { label: string; href: string };
+}

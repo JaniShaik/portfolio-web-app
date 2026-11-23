@@ -14,6 +14,19 @@ describe("HomePage", () => {
     expect(numbers).toEqual(numbers.map((_, index) => index + 1));
   });
 
+  it("follows the Stitch section order", () => {
+    render(<HomePage />);
+
+    expect(screen.getAllByRole("heading", { level: 2 }).map((h) => h.textContent)).toEqual([
+      "Impact at a Glance",
+      "Engineering Depth. Architectural Thinking. Leadership Impact.",
+      "What I Bring to the Table.",
+      "Selected Work & Engineering Impact.",
+      "Thoughts, Experiences & Perspectives.",
+      "Technology Is Built by People, Not Just Code.",
+    ]);
+  });
+
   it("renders a single H1", () => {
     render(<HomePage />);
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);

@@ -1,5 +1,12 @@
 import { PhilosophySection } from "@/components/sections/philosophy-section";
-import { BackgroundImpactSection, HeroSection, MetricsSection } from "@/components/sections/home";
+import {
+  BackgroundImpactSection,
+  CaseStudiesSection,
+  CoreCapabilitiesSection,
+  HeroSection,
+  InsightsSection,
+  MetricsSection,
+} from "@/components/sections/home";
 import { siteConfig } from "@/lib/constants";
 import { createPageMetadata } from "@/lib/seo";
 
@@ -16,6 +23,9 @@ export default function HomePage() {
       <HeroSection />
       <MetricsSection />
       <BackgroundImpactSection />
+      <CoreCapabilitiesSection />
+      <CaseStudiesSection />
+      <InsightsSection />
       <PhilosophySection />
     </>
   );

@@ -1,6 +1,6 @@
 /** Homepage "Leadership Philosophy" content, from the Google Stitch homepage design. */
 export const philosophyContent = {
-  eyebrow: "02 / Philosophy",
+  eyebrow: "05 / Philosophy",
   title: "Technology Is Built by People,",
   titleAccent: "Not Just Code.",
   quote:
