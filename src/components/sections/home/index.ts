@@ -4,3 +4,4 @@ export { BackgroundImpactSection } from "./background-impact-section";
 export { CoreCapabilitiesSection } from "./core-capabilities-section";
 export { CaseStudiesSection } from "./case-studies-section";
 export { InsightsSection } from "./insights-section";
+export { CredentialsSection } from "./credentials-section";

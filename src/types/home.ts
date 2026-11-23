@@ -126,3 +126,41 @@ export interface InsightsContent extends SectionHeadingContent {
   /** "View all" link; rendered top-right on desktop and as a full-width button on mobile. */
   allLink?: { label: string; href: string };
 }
+
+export type FoundationIcon = "experience" | "architecture" | "cloud" | "ai";
+
+/** A professional foundation: an area of experience, not a certification. */
+export interface Foundation {
+  id: string;
+  title: string;
+  icon: FoundationIcon;
+  points: readonly string[];
+}
+
+/** A formal certification. Only add certifications that have actually been earned. */
+export interface Certification {
+  id: string;
+  name: string;
+  issuer: string;
+}
+
+export interface StrategicChannelContent {
+  /** Small label above the heading, e.g. "Direct Strategic Channel". */
+  label: string;
+  title: string;
+  description: readonly string[];
+  /** Primary CTA label; its target is the profile email link (or the contact page). */
+  connectLabel: string;
+  /** Secondary CTA label; its target is `profile.resume`. */
+  resumeLabel: string;
+}
+
+export interface CredentialsContent {
+  eyebrow: string;
+  title: string;
+  narrative: readonly string[];
+  foundations: readonly Foundation[];
+  /** Rendered as an "Industry Certifications" list when non-empty. */
+  certifications: readonly Certification[];
+  channel: StrategicChannelContent;
+}
