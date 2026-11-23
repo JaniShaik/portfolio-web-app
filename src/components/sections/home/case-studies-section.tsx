@@ -15,14 +15,14 @@ export function CaseStudiesSection({ content = caseStudiesContent }: CaseStudies
     <section
       id="featured-projects"
       aria-labelledby="case-studies-title"
-      className="scroll-mt-20 border-t py-10 md:py-20 lg:py-28"
+      className="scroll-mt-20 border-t section-spacing"
     >
       <Container>
         <SectionHeading id="case-studies-title" content={content} />
         <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8">
           {content.items.map((study, index) => (
-            <li key={study.title}>
-              <article className="flex h-full flex-col justify-between overflow-hidden rounded-xs border bg-muted transition-colors duration-200 hover:border-foreground lg:bg-background">
+            <li key={study.id}>
+              <article className="flex h-full flex-col justify-between overflow-hidden rounded-xs border bg-muted lg:bg-background">
                 <div className="p-4 md:p-8">
                   <div className="mb-4 flex flex-wrap items-center justify-between gap-2 border-b pb-4 md:mb-6 md:pb-6">
                     <p className="font-mono text-label-sm tracking-wider text-muted-foreground uppercase">
@@ -46,9 +46,10 @@ export function CaseStudiesSection({ content = caseStudiesContent }: CaseStudies
                     aria-label={`${study.title} technologies`}
                     className="flex flex-wrap gap-1.5 md:gap-2"
                   >
-                    {study.technologies.map((technology) => (
+                    {/* Static, never reordered and stateless: the index is a stable key. */}
+                    {study.technologies.map((technology, technologyIndex) => (
                       <li
-                        key={technology}
+                        key={technologyIndex}
                         className="rounded-xs border bg-background px-2.5 py-1 text-label-sm font-medium text-foreground lg:bg-muted"
                       >
                         {technology}

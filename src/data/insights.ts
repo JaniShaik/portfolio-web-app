@@ -14,18 +14,21 @@ export const insightsContent: InsightsContent = {
     "Ideas on enterprise architecture, software modernization, AI in engineering and technology leadership.",
   items: [
     {
+      id: "resilient-distributed-systems",
       category: "Enterprise Architecture",
       title: "Designing Resilient Distributed Systems",
       summary:
         "Architecture trade-offs, event-driven design, API boundaries and the resilience patterns that keep distributed platforms reliable.",
     },
     {
+      id: "ai-assisted-modernization",
       category: "AI & Modernization",
       title: "AI-Assisted Software Modernization",
       summary:
         "Agentic AI in software engineering, AI-assisted code migration and practical strategies for modernizing legacy systems at enterprise scale.",
     },
     {
+      id: "engineering-leadership-ai",
       category: "Engineering Leadership",
       title: "Engineering Leadership in the Age of AI",
       summary:

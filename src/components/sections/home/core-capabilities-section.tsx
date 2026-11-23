@@ -36,7 +36,7 @@ export function CoreCapabilitiesSection({
     <section
       id="expertise"
       aria-labelledby="core-capabilities-title"
-      className="scroll-mt-20 border-t bg-muted py-10 md:py-20 lg:py-28"
+      className="scroll-mt-20 border-t bg-muted section-spacing"
     >
       <Container>
         <SectionHeading id="core-capabilities-title" content={content} />
@@ -45,8 +45,8 @@ export function CoreCapabilitiesSection({
             const Icon = capabilityIcons[capability.icon];
             return (
               <li
-                key={capability.title}
-                className="flex flex-col justify-between rounded-xs border bg-background p-4 transition-colors duration-200 hover:border-foreground md:p-7"
+                key={capability.id}
+                className="flex flex-col justify-between rounded-xs border bg-background p-4 md:p-7"
               >
                 <div>
                   <div className="mb-2 flex items-center justify-between md:mb-5">
@@ -66,9 +66,10 @@ export function CoreCapabilitiesSection({
                   aria-label={`${capability.title} technologies`}
                   className="hidden flex-wrap gap-1.5 border-t pt-4 md:flex"
                 >
-                  {capability.tags.map((tag) => (
+                  {/* Static, never reordered and stateless: the index is a stable key. */}
+                  {capability.tags.map((tag, tagIndex) => (
                     <li
-                      key={tag}
+                      key={tagIndex}
                       className="rounded-xs border bg-muted px-2 py-0.5 text-label-sm text-muted-foreground"
                     >
                       {tag}

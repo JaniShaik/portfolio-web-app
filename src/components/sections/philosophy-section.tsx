@@ -11,7 +11,7 @@ export function PhilosophySection() {
     <section
       id={PHILOSOPHY_SECTION_ID}
       aria-labelledby={titleId}
-      className="scroll-mt-20 border-t py-section lg:py-section-lg"
+      className="scroll-mt-20 border-t section-spacing"
     >
       <Container>
         <p className="mb-6 flex items-center gap-3 text-label-sm font-semibold tracking-widest text-brand uppercase">

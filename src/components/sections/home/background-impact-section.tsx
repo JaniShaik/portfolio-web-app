@@ -24,7 +24,7 @@ export function BackgroundImpactSection() {
   const accentLine = headline.at(-1);
 
   return (
-    <section aria-labelledby="background-impact-title" className="py-10 md:py-20 lg:py-28">
+    <section aria-labelledby="background-impact-title" className="section-spacing">
       <Container>
         <p className="mb-1 flex items-center gap-3 text-label-sm font-semibold tracking-widest text-brand uppercase lg:mb-6">
           {eyebrow}

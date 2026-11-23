@@ -74,6 +74,8 @@ export type CapabilityIcon =
   "architecture" | "modernization" | "backend" | "ai" | "cloud" | "leadership";
 
 export interface Capability {
+  /** Stable unique key, e.g. "architecture". */
+  id: string;
   title: string;
   description: string;
   icon: CapabilityIcon;
@@ -86,6 +88,8 @@ export interface CoreCapabilitiesContent extends SectionHeadingContent {
 }
 
 export interface CaseStudy {
+  /** Stable unique key, e.g. "java-modernization-platform"; reusable as a future route slug. */
+  id: string;
   /** Short category shown in the card overline, e.g. "Financial Systems". */
   category: string;
   title: string;
@@ -108,6 +112,8 @@ export interface CaseStudiesContent extends SectionHeadingContent {
  * `href` (and optional `meta`, e.g. reading time). Never add an `href` for unpublished work.
  */
 export interface InsightItem {
+  /** Stable unique key; reusable as the article slug once published. */
+  id: string;
   category: string;
   title: string;
   summary: string;

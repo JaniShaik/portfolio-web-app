@@ -33,8 +33,9 @@
   /* Spacing conventions (base unit = 0.25rem). → py-section, px-gutter … */
   --spacing-gutter: 1.25rem; /* Stitch margin-mobile */
   --spacing-gutter-lg: 3rem; /* Stitch margin (desktop) */
-  --spacing-section: 4rem;
-  --spacing-section-lg: 6rem;
+  --spacing-section: 2.5rem; /* Stitch space-xl (mobile section padding) */
+  --spacing-section-md: 5rem; /* Stitch py-20 */
+  --spacing-section-lg: 7rem; /* Stitch lg:py-28 */
 
   /* Typography scale (fluid display sizes for headings). */
   --text-display: clamp(2.5rem, 1.75rem + 3vw, 4rem);
@@ -237,6 +238,11 @@
 /* Keyboard focus indicator for text links and icon links (cobalt outline). */
 @utility focus-ring {
   @apply focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring;
+}
+
+/* Vertical padding for homepage content sections (Stitch). Usage: <section className="section-spacing"> */
+@utility section-spacing {
+  @apply py-section md:py-section-md lg:py-section-lg;
 }
 
 /* Centered, padded page container. Usage: <div className="container-page"> */

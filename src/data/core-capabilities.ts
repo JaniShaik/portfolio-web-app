@@ -11,6 +11,7 @@ export const coreCapabilitiesContent: CoreCapabilitiesContent = {
     "Technology depth, architecture and engineering leadership, applied together to complex enterprise initiatives.",
   items: [
     {
+      id: "architecture",
       title: "Enterprise Architecture & System Design",
       icon: "architecture",
       description:
@@ -18,6 +19,7 @@ export const coreCapabilitiesContent: CoreCapabilitiesContent = {
       tags: ["Microservices", "Event-Driven", "DDD", "System Design"],
     },
     {
+      id: "modernization",
       title: "Enterprise Modernization",
       icon: "modernization",
       description:
@@ -25,6 +27,7 @@ export const coreCapabilitiesContent: CoreCapabilitiesContent = {
       tags: ["Java 8 → 17", "Spring Boot Migration", "Governance", "Remediation"],
     },
     {
+      id: "backend-platform",
       title: "Backend & Platform Engineering",
       icon: "backend",
       description:
@@ -32,6 +35,7 @@ export const coreCapabilitiesContent: CoreCapabilitiesContent = {
       tags: ["Java 17/21", "Spring Boot", "Apache Kafka", "PostgreSQL"],
     },
     {
+      id: "ai-engineering",
       title: "AI & Intelligent Engineering",
       icon: "ai",
       description:
@@ -39,6 +43,7 @@ export const coreCapabilitiesContent: CoreCapabilitiesContent = {
       tags: ["LangChain", "LangGraph", "RAG", "MCP"],
     },
     {
+      id: "cloud-devops",
       title: "Cloud & DevOps Engineering",
       icon: "cloud",
       description:
@@ -46,6 +51,7 @@ export const coreCapabilitiesContent: CoreCapabilitiesContent = {
       tags: ["AWS", "GCP", "Kubernetes", "CI/CD"],
     },
     {
+      id: "engineering-leadership",
       title: "Engineering Leadership",
       icon: "leadership",
       description:

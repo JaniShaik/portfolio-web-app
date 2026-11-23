@@ -1,11 +1,12 @@
 import { render, screen, within } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   CaseStudiesSection,
   CoreCapabilitiesSection,
   InsightsSection,
 } from "@/components/sections/home";
 import { caseStudiesContent } from "@/data/case-studies";
+import { coreCapabilitiesContent } from "@/data/core-capabilities";
 import { insightsContent } from "@/data/insights";
 
 describe("CoreCapabilitiesSection", () => {
@@ -88,6 +89,7 @@ describe("InsightsSection", () => {
           ...insightsContent,
           items: [
             {
+              id: "internal",
               category: "AI",
               title: "Internal Article",
               summary: "…",
@@ -95,6 +97,7 @@ describe("InsightsSection", () => {
               meta: "5 min read",
             },
             {
+              id: "external",
               category: "AI",
               title: "External Article",
               summary: "…",
@@ -118,5 +121,94 @@ describe("InsightsSection", () => {
 
     // Desktop header link and mobile full-width button.
     expect(screen.getAllByRole("link", { name: /Follow on LinkedIn/ })).toHaveLength(2);
+  });
+});
+
+describe("InsightsSection link handling", () => {
+  const renderWithHref = (href: string) =>
+    render(
+      <InsightsSection
+        content={{
+          ...insightsContent,
+          items: [{ id: "a", category: "Topic", title: "Article", summary: "…", href }],
+        }}
+      />,
+    );
+
+  it.each(["/projects", "/architecture"])("renders %s as a same-tab app link", (href) => {
+    renderWithHref(href);
+    const link = screen.getByRole("link", { name: "Read article: Article" });
+    expect(link).toHaveAttribute("href", href);
+    expect(link).not.toHaveAttribute("target");
+  });
+
+  it.each(["//medium.com/@x/post", "https://medium.com/article", "http://example.com"])(
+    "opens %s in a new tab and announces it",
+    (href) => {
+      renderWithHref(href);
+      const link = screen.getByRole("link", { name: /Read article: Article/ });
+      expect(link).toHaveAttribute("href", href);
+      expect(link).toHaveAttribute("target", "_blank");
+      expect(link).toHaveAttribute("rel", "noopener noreferrer");
+      expect(link).toHaveAccessibleName(/opens in a new tab/);
+    },
+  );
+
+  it.each(["#insights", "#topic", "mailto:someone@example.com"])(
+    "keeps %s in the current tab without a new-tab notice",
+    (href) => {
+      renderWithHref(href);
+      const link = screen.getByRole("link", { name: "Read article: Article" });
+      expect(link).toHaveAttribute("href", href);
+      expect(link).not.toHaveAttribute("target");
+    },
+  );
+});
+
+describe("home content cards", () => {
+  afterEach(() => vi.restoreAllMocks());
+
+  it("render duplicate titles and tags without React key warnings", () => {
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    const [capability] = coreCapabilitiesContent.items;
+    const [study] = caseStudiesContent.items;
+    if (!capability || !study) throw new Error("expected content");
+
+    render(
+      <>
+        <CoreCapabilitiesSection
+          content={{
+            ...coreCapabilitiesContent,
+            items: [
+              { ...capability, id: "one", tags: ["Java", "Java"] },
+              { ...capability, id: "two" },
+            ],
+          }}
+        />
+        <CaseStudiesSection
+          content={{
+            ...caseStudiesContent,
+            items: [
+              { ...study, id: "one", technologies: ["Kafka", "Kafka"] },
+              { ...study, id: "two" },
+            ],
+          }}
+        />
+      </>,
+    );
+
+    expect(error.mock.calls.flat().map(String).join(" ")).not.toMatch(/same key/);
+  });
+
+  it("do not style static cards as interactive on hover", () => {
+    const { container } = render(
+      <>
+        <CoreCapabilitiesSection />
+        <CaseStudiesSection />
+        <InsightsSection />
+      </>,
+    );
+    const hoverStyled = [...container.querySelectorAll("[class*='hover:border']")];
+    expect(hoverStyled).toHaveLength(0);
   });
 });

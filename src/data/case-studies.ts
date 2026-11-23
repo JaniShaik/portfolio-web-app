@@ -12,6 +12,7 @@ export const caseStudiesContent: CaseStudiesContent = {
     "Complex engineering problems solved through architecture, modernization and engineering leadership.",
   items: [
     {
+      id: "java-modernization-platform",
       category: "AI Engineering",
       title: "AI-Powered Java Modernization Platform",
       impact: "Automated Modernization Workflows",
@@ -21,6 +22,7 @@ export const caseStudiesContent: CaseStudiesContent = {
       domain: "Enterprise Banking",
     },
     {
+      id: "global-disbursement-platform",
       category: "Financial Systems",
       title: "HSBC Global Disbursement Platform",
       impact: "≈3× Bulk Payment Throughput",
@@ -30,6 +32,7 @@ export const caseStudiesContent: CaseStudiesContent = {
       domain: "Payments & Disbursements",
     },
     {
+      id: "java-17-modernization",
       category: "Modernization",
       title: "Enterprise Java 8 to Java 17 Modernization",
       impact: "≈40% Migration Effort Reduction",
@@ -39,6 +42,7 @@ export const caseStudiesContent: CaseStudiesContent = {
       domain: "Enterprise Banking",
     },
     {
+      id: "engineering-transformation",
       category: "Engineering Leadership",
       title: "Enterprise Engineering Transformation",
       impact: "15% Delivery Efficiency Gain",

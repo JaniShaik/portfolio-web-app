@@ -1,9 +1,9 @@
-import { ArrowUpRightIcon } from "lucide-react";
+import { ArrowRightIcon, ArrowUpRightIcon } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Container } from "@/components/shared/container";
 import { insightsContent } from "@/data/insights";
-import { cn } from "@/lib/utils";
+import { cn, getLinkKind } from "@/lib/utils";
 import type { InsightsContent } from "@/types";
 import { SectionHeading } from "./section-heading";
 
@@ -13,15 +13,29 @@ interface InsightLinkProps {
   children: ReactNode;
 }
 
-/** Internal links use `next/link`; external ones open in a new tab and say so. */
+/**
+ * App routes use `next/link`; `http(s)` and protocol-relative URLs open in a new tab and
+ * announce it; anchors, `mailto:` and other links stay in the current tab.
+ */
 function InsightLink({ href, className, children }: InsightLinkProps) {
+  const kind = getLinkKind(href);
   const classes = cn(
     "inline-flex items-center gap-1.5 text-label-md font-medium text-foreground focus-ring transition-colors hover:text-brand",
     className,
   );
-  const icon = <ArrowUpRightIcon aria-hidden="true" className="size-4" />;
 
-  if (href.startsWith("/")) {
+  if (kind === "external") {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
+        {children}
+        <span className="sr-only"> (opens in a new tab)</span>
+        <ArrowUpRightIcon aria-hidden="true" className="size-4" />
+      </a>
+    );
+  }
+
+  const icon = <ArrowRightIcon aria-hidden="true" className="size-4" />;
+  if (kind === "internal") {
     return (
       <Link href={href} className={classes}>
         {children}
@@ -30,9 +44,8 @@ function InsightLink({ href, className, children }: InsightLinkProps) {
     );
   }
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
+    <a href={href} className={classes}>
       {children}
-      <span className="sr-only"> (opens in a new tab)</span>
       {icon}
     </a>
   );
@@ -53,7 +66,7 @@ export function InsightsSection({ content = insightsContent }: InsightsSectionPr
     <section
       id="insights"
       aria-labelledby="insights-title"
-      className="scroll-mt-20 border-t bg-muted py-10 md:py-20 lg:py-28"
+      className="scroll-mt-20 border-t bg-muted section-spacing"
     >
       <Container>
         <SectionHeading
@@ -69,8 +82,8 @@ export function InsightsSection({ content = insightsContent }: InsightsSectionPr
         />
         <ul className="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-6">
           {content.items.map((item) => (
-            <li key={item.title}>
-              <article className="flex h-full flex-col justify-between rounded-xs border bg-background p-4 transition-colors duration-200 hover:border-foreground md:p-7">
+            <li key={item.id}>
+              <article className="flex h-full flex-col justify-between rounded-xs border bg-background p-4 md:p-7">
                 <div>
                   <div className="mb-2 flex items-center justify-between gap-3 text-label-sm md:mb-4">
                     <p className="font-medium text-brand uppercase">{item.category}</p>

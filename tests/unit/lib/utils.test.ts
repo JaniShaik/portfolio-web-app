@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { cn, isActivePath, joinUrl } from "@/lib/utils";
+import { cn, getLinkKind, isActivePath, joinUrl } from "@/lib/utils";
 
 describe("cn", () => {
   it("joins conditional class names", () => {
@@ -39,6 +39,24 @@ describe("joinUrl", () => {
 
   it("returns the root URL with a trailing slash", () => {
     expect(joinUrl("https://example.com")).toBe("https://example.com/");
+  });
+});
+
+describe("getLinkKind", () => {
+  it.each([
+    ["/projects", "internal"],
+    ["/architecture", "internal"],
+    ["/#philosophy", "internal"],
+    ["//medium.com/@x/post", "external"],
+    ["https://medium.com/article", "external"],
+    ["http://example.com", "external"],
+    ["HTTPS://EXAMPLE.COM", "external"],
+    ["#insights", "anchor"],
+    ["#topic", "anchor"],
+    ["mailto:someone@example.com", "other"],
+    ["tel:+911234567890", "other"],
+  ] as const)("classifies %s as %s", (href, kind) => {
+    expect(getLinkKind(href)).toBe(kind);
   });
 });
 
