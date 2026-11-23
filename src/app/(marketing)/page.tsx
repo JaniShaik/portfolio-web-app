@@ -3,6 +3,7 @@ import {
   BackgroundImpactSection,
   CaseStudiesSection,
   CoreCapabilitiesSection,
+  CredentialsSection,
   HeroSection,
   InsightsSection,
   MetricsSection,
@@ -27,6 +28,7 @@ export default function HomePage() {
       <CaseStudiesSection />
       <InsightsSection />
       <PhilosophySection />
+      <CredentialsSection />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { cn } from "@/lib/utils";
 import type { SectionHeadingContent } from "@/types";
 
 interface SectionHeadingProps {
@@ -7,15 +8,22 @@ interface SectionHeadingProps {
   content: SectionHeadingContent;
   /** Optional trailing element, e.g. a desktop "view all" link. */
   action?: ReactNode;
+  /** Extra classes, e.g. to tighten the bottom margin when content follows directly. */
+  className?: string;
 }
 
 /**
  * Stitch homepage section header: numbered eyebrow and title on the left, intro (and an
  * optional action) on the right from `md`; stacked on mobile.
  */
-export function SectionHeading({ id, content, action }: SectionHeadingProps) {
+export function SectionHeading({ id, content, action, className }: SectionHeadingProps) {
   return (
-    <div className="mb-6 flex flex-col justify-between gap-1 md:mb-12 md:flex-row md:items-end md:gap-4">
+    <div
+      className={cn(
+        "mb-6 flex flex-col justify-between gap-1 md:mb-12 md:flex-row md:items-end md:gap-4",
+        className,
+      )}
+    >
       <div>
         <p className="mb-1 flex items-center gap-3 text-label-sm font-semibold tracking-widest text-brand uppercase md:mb-3">
           {content.eyebrow}

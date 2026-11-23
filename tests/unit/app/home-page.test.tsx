@@ -24,6 +24,7 @@ describe("HomePage", () => {
       "Selected Work & Engineering Impact.",
       "Thoughts, Experiences & Perspectives.",
       "Technology Is Built by People, Not Just Code.",
+      "Built on experience. Driven by curiosity.",
     ]);
   });
 
