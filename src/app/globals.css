@@ -49,6 +49,14 @@
   --text-headline-display--line-height: 4.25rem;
   --text-headline-display--letter-spacing: -0.04em;
   --text-headline-display--font-weight: 600;
+  --text-headline-lg: 2.25rem;
+  --text-headline-lg--line-height: 2.75rem;
+  --text-headline-lg--letter-spacing: -0.03em;
+  --text-headline-lg--font-weight: 600;
+  --text-headline-md: 1.5rem;
+  --text-headline-md--line-height: 2rem;
+  --text-headline-md--letter-spacing: -0.02em;
+  --text-headline-md--font-weight: 500;
   --text-headline-lg-mobile: 1.75rem;
   --text-headline-lg-mobile--line-height: 2.125rem;
   --text-headline-lg-mobile--letter-spacing: -0.02em;

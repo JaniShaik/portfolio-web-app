@@ -43,3 +43,21 @@ export interface MetricsContent {
   title: string;
   items: readonly Metric[];
 }
+
+/** One stage of the professional journey, rendered as a numbered pillar card. */
+export interface JourneyStage {
+  /** Short category shown beside the number, e.g. "Foundation". */
+  label: string;
+  title: string;
+  /** Impact themes associated with this stage. */
+  themes: readonly string[];
+}
+
+export interface BackgroundImpactContent {
+  eyebrow: string;
+  /** Headline lines; the last line renders in the muted accent colour. */
+  headline: readonly [string, ...string[]];
+  narrative: readonly string[];
+  journey: readonly JourneyStage[];
+  link: CallToAction;
+}

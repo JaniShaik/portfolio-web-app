@@ -1,5 +1,5 @@
 import { PhilosophySection } from "@/components/sections/philosophy-section";
-import { HeroSection, MetricsSection } from "@/components/sections/home";
+import { BackgroundImpactSection, HeroSection, MetricsSection } from "@/components/sections/home";
 import { siteConfig } from "@/lib/constants";
 import { createPageMetadata } from "@/lib/seo";
 
@@ -15,6 +15,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <MetricsSection />
+      <BackgroundImpactSection />
       <PhilosophySection />
     </>
   );
