@@ -5,7 +5,10 @@ import { profile } from "@/data/profile";
 import { emailLink } from "@/data/social-links";
 import { siteConfig } from "@/lib/constants";
 
-vi.mock("next/navigation", () => ({ usePathname: () => "/" }));
+vi.mock("next/navigation", () => ({
+  usePathname: () => "/",
+  useRouter: () => ({ push: vi.fn() }),
+}));
 
 describe("Header", () => {
   it("renders the banner with brand, role, navigation and menu toggle", () => {

@@ -77,6 +77,11 @@ describe("navigation menus", () => {
     expect(footerNavigation.map((item) => item.href)).toContain(pages.experience.href);
   });
 
+  it("keeps Architecture out of the header, as in the Stitch header, and links it from the footer", () => {
+    expect(mainNavigation.map((item) => item.href)).not.toContain(pages.architecture.href);
+    expect(footerNavigation.map((item) => item.href)).toContain(pages.architecture.href);
+  });
+
   it("makes every public page reachable from the header or footer", () => {
     const linked = new Set(
       [...mainNavigation, ...footerNavigation, pages.contact].map((item) => item.href),

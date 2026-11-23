@@ -48,4 +48,17 @@ describe("Navigation", () => {
     expect(screen.getByRole("link", { name: "Projects" })).toHaveAttribute("aria-current", "page");
     expect(screen.getByRole("link", { name: "Home" })).not.toHaveAttribute("aria-current");
   });
+
+  it.each(["/", "/experience", "/projects"])(
+    "never marks the Philosophy anchor as current on %s",
+    (route) => {
+      pathname.current = route;
+      render(<Navigation />);
+
+      expect(screen.getByRole("link", { name: "Philosophy" })).not.toHaveAttribute("aria-current");
+      expect(
+        screen.getAllByRole("link").filter((link) => link.getAttribute("aria-current") === "page"),
+      ).toHaveLength(1);
+    },
+  );
 });

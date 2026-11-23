@@ -84,7 +84,7 @@ export function HeroSection() {
                 className="mt-2.5 hidden items-center justify-between px-1 text-label-sm text-muted-foreground lg:flex"
               >
                 <span className="tracking-widest uppercase">{portrait.legend.reference}</span>
-                <span className="font-mono text-[11px]">{portrait.legend.coordinates}</span>
+                <span className="font-mono">{portrait.legend.coordinates}</span>
               </div>
             </div>
           </figure>
@@ -92,7 +92,10 @@ export function HeroSection() {
           <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-4 lg:col-span-7 lg:pr-6">
             <Link
               href={primaryCta.href}
-              className={cn(ctaBaseClassName, "bg-foreground text-background hover:bg-black")}
+              className={cn(
+                ctaBaseClassName,
+                "bg-foreground text-background hover:bg-foreground-hover",
+              )}
             >
               {primaryCta.label}
               <ArrowRightIcon aria-hidden="true" className="size-4.5" />

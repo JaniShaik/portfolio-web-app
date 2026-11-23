@@ -121,6 +121,7 @@
   --color-subtle-foreground: var(--subtle-foreground);
   --color-brand: var(--brand);
   --color-brand-hover: var(--brand-hover);
+  --color-foreground-hover: var(--foreground-hover);
   /* Border-radius conventions, all derived from --radius. */
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
@@ -135,6 +136,7 @@
   color-scheme: light;
   --background: oklch(1 0 0); /* surface-canvas #FFFFFF */
   --foreground: oklch(0.178 0 0); /* text-primary / border-strong #111111 */
+  --foreground-hover: oklch(0 0 0); /* hover state for foreground-filled actions #000000 */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.178 0 0);
   --popover: oklch(1 0 0);
@@ -174,6 +176,7 @@
   color-scheme: dark;
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
+  --foreground-hover: oklch(1 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);

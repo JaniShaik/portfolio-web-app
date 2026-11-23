@@ -9,7 +9,20 @@ import { extendTailwindMerge } from "tailwind-merge";
 const twMerge = extendTailwindMerge({
   extend: {
     theme: {
-      text: ["display", "heading", "headline-sm", "body-md", "body-sm", "label-md", "label-sm"],
+      text: [
+        "display",
+        "heading",
+        "headline-display",
+        "headline-lg",
+        "headline-lg-mobile",
+        "headline-md",
+        "headline-sm",
+        "body-lg",
+        "body-md",
+        "body-sm",
+        "label-md",
+        "label-sm",
+      ],
     },
   },
 });
@@ -26,8 +39,13 @@ export function joinUrl(baseUrl: string, path = "/"): string {
   return normalisedPath === "/" ? `${base}/` : `${base}${normalisedPath}`;
 }
 
-/** Whether `href` is the current route or an ancestor of it (`/` only matches exactly). */
+/**
+ * Whether `href` is the current route or an ancestor of it (`/` only matches exactly).
+ * In-page anchors such as `/#philosophy` are never the current page: the page that contains
+ * them is, so Home stays current while reading its Philosophy section.
+ */
 export function isActivePath(pathname: string, href: string): boolean {
+  if (href.includes("#")) return false;
   if (href === "/") return pathname === "/";
   return pathname === href || pathname.startsWith(`${href}/`);
 }
