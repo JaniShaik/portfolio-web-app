@@ -45,6 +45,17 @@
   --text-heading--letter-spacing: -0.015em;
 
   /* Stitch type scale (Geist). → text-headline-sm, text-body-sm, text-label-md … */
+  --text-headline-display: 4rem;
+  --text-headline-display--line-height: 4.25rem;
+  --text-headline-display--letter-spacing: -0.04em;
+  --text-headline-display--font-weight: 600;
+  --text-headline-lg-mobile: 1.75rem;
+  --text-headline-lg-mobile--line-height: 2.125rem;
+  --text-headline-lg-mobile--letter-spacing: -0.02em;
+  --text-headline-lg-mobile--font-weight: 600;
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.75rem;
+  --text-body-lg--letter-spacing: -0.01em;
   --text-headline-sm: 1.125rem;
   --text-headline-sm--line-height: 1.5rem;
   --text-headline-sm--letter-spacing: -0.01em;
