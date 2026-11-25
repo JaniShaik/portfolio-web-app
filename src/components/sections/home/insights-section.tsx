@@ -1,6 +1,8 @@
 import { ArrowRightIcon, ArrowUpRightIcon } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { RevealGroup } from "@/components/animations/reveal-group";
+import { REVEAL_ITEM } from "@/components/animations/reveal-item";
 import { Container } from "@/components/shared/container";
 import { insightsContent } from "@/data/insights";
 import { cn, getLinkKind } from "@/lib/utils";
@@ -20,7 +22,7 @@ interface InsightLinkProps {
 function InsightLink({ href, className, children }: InsightLinkProps) {
   const kind = getLinkKind(href);
   const classes = cn(
-    "inline-flex items-center gap-1.5 text-label-md font-medium text-foreground focus-ring transition-colors hover:text-brand",
+    "group inline-flex items-center gap-1.5 text-label-md font-medium text-foreground focus-ring transition-colors hover:text-brand",
     className,
   );
 
@@ -29,12 +31,20 @@ function InsightLink({ href, className, children }: InsightLinkProps) {
       <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
         {children}
         <span className="sr-only"> (opens in a new tab)</span>
-        <ArrowUpRightIcon aria-hidden="true" className="size-4" />
+        <ArrowUpRightIcon
+          aria-hidden="true"
+          className="size-4 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
+        />
       </a>
     );
   }
 
-  const icon = <ArrowRightIcon aria-hidden="true" className="size-4" />;
+  const icon = (
+    <ArrowRightIcon
+      aria-hidden="true"
+      className="size-4 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5"
+    />
+  );
   if (kind === "internal") {
     return (
       <Link href={href} className={classes}>
@@ -69,52 +79,56 @@ export function InsightsSection({ content = insightsContent }: InsightsSectionPr
       className="scroll-mt-20 border-t bg-muted section-spacing"
     >
       <Container>
-        <SectionHeading
-          id="insights-title"
-          content={content}
-          action={
-            allLink ? (
-              <InsightLink href={allLink.href} className="hidden md:inline-flex">
-                {allLink.label}
-              </InsightLink>
-            ) : null
-          }
-        />
-        <ul className="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-6">
-          {content.items.map((item) => (
-            <li key={item.id}>
-              <article className="flex h-full flex-col justify-between rounded-xs border bg-background p-4 md:p-7">
-                <div>
-                  <div className="mb-2 flex items-center justify-between gap-3 text-label-sm md:mb-4">
-                    <p className="font-medium text-brand uppercase">{item.category}</p>
-                    {item.meta ? <p className="text-muted-foreground">{item.meta}</p> : null}
+        <RevealGroup>
+          <div {...REVEAL_ITEM}>
+            <SectionHeading
+              id="insights-title"
+              content={content}
+              action={
+                allLink ? (
+                  <InsightLink href={allLink.href} className="hidden md:inline-flex">
+                    {allLink.label}
+                  </InsightLink>
+                ) : null
+              }
+            />
+          </div>
+          <ul className="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-6">
+            {content.items.map((item) => (
+              <li key={item.id} {...REVEAL_ITEM}>
+                <article className="flex h-full flex-col justify-between rounded-xs border bg-background p-4 md:p-7">
+                  <div>
+                    <div className="mb-2 flex items-center justify-between gap-3 text-label-sm md:mb-4">
+                      <p className="font-medium text-brand uppercase">{item.category}</p>
+                      {item.meta ? <p className="text-muted-foreground">{item.meta}</p> : null}
+                    </div>
+                    <h3 className="mb-1 text-headline-sm leading-snug font-semibold text-foreground md:mb-3">
+                      {item.title}
+                    </h3>
+                    <p className="text-body-sm leading-relaxed text-muted-foreground">
+                      {item.summary}
+                    </p>
                   </div>
-                  <h3 className="mb-1 text-headline-sm leading-snug font-semibold text-foreground md:mb-3">
-                    {item.title}
-                  </h3>
-                  <p className="text-body-sm leading-relaxed text-muted-foreground">
-                    {item.summary}
-                  </p>
-                </div>
-                {item.href ? (
-                  <div className="mt-4 border-t pt-4 md:mt-6">
-                    <InsightLink href={item.href}>
-                      Read article<span className="sr-only">: {item.title}</span>
-                    </InsightLink>
-                  </div>
-                ) : null}
-              </article>
-            </li>
-          ))}
-        </ul>
-        {allLink ? (
-          <InsightLink
-            href={allLink.href}
-            className="mt-6 h-11 w-full justify-center rounded-xs border bg-background md:hidden"
-          >
-            {allLink.label}
-          </InsightLink>
-        ) : null}
+                  {item.href ? (
+                    <div className="mt-4 border-t pt-4 md:mt-6">
+                      <InsightLink href={item.href}>
+                        Read article<span className="sr-only">: {item.title}</span>
+                      </InsightLink>
+                    </div>
+                  ) : null}
+                </article>
+              </li>
+            ))}
+          </ul>
+          {allLink ? (
+            <InsightLink
+              href={allLink.href}
+              className="mt-6 h-11 w-full justify-center rounded-xs border bg-background md:hidden"
+            >
+              {allLink.label}
+            </InsightLink>
+          ) : null}
+        </RevealGroup>
       </Container>
     </section>
   );

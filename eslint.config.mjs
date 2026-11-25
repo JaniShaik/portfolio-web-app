@@ -17,6 +17,9 @@ const eslintConfig = defineConfig([
         "error",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
+      // `<li {...props} key={id}>` falls back to createElement, which passes the element's
+      // children as an array and triggers React "unique key" warnings for them.
+      "react/jsx-key": ["error", { checkKeyMustBeforeSpread: true }],
     },
   },
   // Must stay last: disables stylistic rules that conflict with Prettier.

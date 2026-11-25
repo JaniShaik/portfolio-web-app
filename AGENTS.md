@@ -36,7 +36,7 @@ src/components/
   sections/                 Page sections — currently only philosophy-section
   shared/                   container, page-placeholder, brand-icons (LinkedIn/GitHub SVG marks)
   ui/                       shadcn primitives (button, card, input, label, separator, sheet, textarea)
-  animations/               fade-in (Motion)
+  animations/               scroll reveal (useScrollReveal, FadeIn, RevealGroup + REVEAL_ITEM) and CountUp: CSS transitions + IntersectionObserver
 src/data/                   Typed content: profile, navigation, social-links, footer, philosophy, skills
 src/lib/                    constants (siteConfig), seo, utils (cn, joinUrl, isActivePath), env,
                             server-env, security/, validations/, email/
@@ -57,7 +57,7 @@ tests/unit|integration|e2e  Vitest (jsdom/node) and Playwright (desktop Chrome +
 
 Tests enforce that `pages` matches the `page.tsx` files on disk and that every page is linked from the header or footer. When adding a page, add it to `pages` and to a menu.
 
-**Rendering:** Server Components by default; client components only for interaction (`navigation`, `mobile-navigation`, `copyright-year`, `fade-in`, `ui/sheet`). With Cache Components, `new Date()`/`Math.random()` during prerender fail the build — compute them in a client component or wrap request-time work in `<Suspense>`.
+**Rendering:** Server Components by default; client components only for interaction (`navigation`, `mobile-navigation`, `copyright-year`, `animations/*`, `ui/sheet`). **Motion:** hero entrance is CSS-only (`motion-safe:animate-fade-up` + `animation-delay-*` tokens); below-the-fold content reveals once via `RevealGroup`/`FadeIn` (server-rendered visible, hidden only after mount, never under reduced motion). Import `REVEAL_ITEM` from `reveal-item.ts`, not the client module: client-module values become client references in Server Components. With Cache Components, `new Date()`/`Math.random()` during prerender fail the build — compute them in a client component or wrap request-time work in `<Suspense>`.
 
 **Styling:** Tailwind utilities on semantic tokens from `globals.css`. `cn()` uses a `tailwind-merge` config that knows the custom font-size tokens — register any new `--text-*` token there too, or `cn()` will drop it.
 
