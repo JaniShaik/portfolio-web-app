@@ -26,7 +26,7 @@ export function CaseStudiesSection({ content = caseStudiesContent }: CaseStudies
           </div>
           <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8">
             {content.items.map((study, index) => (
-              <li {...REVEAL_ITEM} key={study.id}>
+              <li key={study.id} {...REVEAL_ITEM}>
                 <article className="flex h-full flex-col justify-between overflow-hidden rounded-xs border bg-muted lg:bg-background">
                   <div className="p-4 md:p-8">
                     <div className="mb-4 flex flex-wrap items-center justify-between gap-2 border-b pb-4 md:mb-6 md:pb-6">

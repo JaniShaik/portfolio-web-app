@@ -95,7 +95,7 @@ export function InsightsSection({ content = insightsContent }: InsightsSectionPr
           </div>
           <ul className="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-6">
             {content.items.map((item) => (
-              <li {...REVEAL_ITEM} key={item.id}>
+              <li key={item.id} {...REVEAL_ITEM}>
                 <article className="flex h-full flex-col justify-between rounded-xs border bg-background p-4 md:p-7">
                   <div>
                     <div className="mb-2 flex items-center justify-between gap-3 text-label-sm md:mb-4">

@@ -50,8 +50,8 @@ export function CoreCapabilitiesSection({
               const Icon = capabilityIcons[capability.icon];
               return (
                 <li
-                  {...REVEAL_ITEM}
                   key={capability.id}
+                  {...REVEAL_ITEM}
                   className="flex flex-col justify-between rounded-xs border bg-background p-4 md:p-7"
                 >
                   <div>

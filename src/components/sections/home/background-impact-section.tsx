@@ -62,8 +62,8 @@ export function BackgroundImpactSection() {
                 const Icon = stageIcons[index];
                 return (
                   <li
-                    {...REVEAL_ITEM}
                     key={stage.title}
+                    {...REVEAL_ITEM}
                     className="rounded-xs border bg-muted p-4 lg:bg-background lg:p-6"
                   >
                     <div className="mb-1 flex items-center justify-between lg:mb-3">

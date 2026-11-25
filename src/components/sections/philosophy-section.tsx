@@ -46,7 +46,7 @@ export function PhilosophySection() {
             </div>
             <ul className="divide-y border-t lg:col-span-7 lg:border-t-0">
               {philosophyContent.tenets.map((tenet) => (
-                <li {...REVEAL_ITEM} key={tenet.title} className="space-y-1 py-5">
+                <li key={tenet.title} {...REVEAL_ITEM} className="space-y-1 py-5">
                   <h3 className="text-headline-sm font-semibold text-foreground">{tenet.title}</h3>
                   <p className="text-body-sm leading-relaxed text-muted-foreground">
                     {tenet.description}

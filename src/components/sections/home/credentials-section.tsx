@@ -87,8 +87,8 @@ export function CredentialsSection({ content = credentialsContent }: Credentials
                 const Icon = foundationIcons[foundation.icon];
                 return (
                   <li
-                    {...REVEAL_ITEM}
                     key={foundation.id}
+                    {...REVEAL_ITEM}
                     className="rounded-xs border bg-background p-4 md:p-6"
                   >
                     <div className="mb-3 flex items-start gap-2">
