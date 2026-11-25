@@ -9,6 +9,9 @@ import {
   SparklesIcon,
 } from "lucide-react";
 import Link from "next/link";
+import { FadeIn } from "@/components/animations/fade-in";
+import { RevealGroup } from "@/components/animations/reveal-group";
+import { REVEAL_ITEM } from "@/components/animations/reveal-item";
 import { Container } from "@/components/shared/container";
 import { credentialsContent } from "@/data/credentials";
 import { pages } from "@/data/navigation";
@@ -26,7 +29,7 @@ const foundationIcons: Record<FoundationIcon, LucideIcon> = {
 };
 
 const ctaClassName =
-  "inline-flex h-12 items-center justify-center gap-2 rounded-xs px-8 text-label-md font-medium focus-ring transition-colors";
+  "group inline-flex h-12 items-center justify-center gap-2 rounded-xs px-8 text-label-md font-medium focus-ring transition-colors";
 
 /** Profiles shown beside the CTAs; email is already the primary CTA. */
 const profileLinks = socialLinks.filter((link) => link.platform !== "email");
@@ -49,7 +52,10 @@ export function CredentialsSection({ content = credentialsContent }: Credentials
   const connectContent = (
     <>
       {channel.connectLabel}
-      <ArrowRightIcon aria-hidden="true" className="size-4.5" />
+      <ArrowRightIcon
+        aria-hidden="true"
+        className="size-4.5 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5"
+      />
     </>
   );
 
@@ -60,8 +66,8 @@ export function CredentialsSection({ content = credentialsContent }: Credentials
       className="scroll-mt-20 border-t section-spacing"
     >
       <Container>
-        <div className="grid grid-cols-1 items-start gap-6 md:gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-5">
+        <RevealGroup className="grid grid-cols-1 items-start gap-6 md:gap-12 lg:grid-cols-12 lg:gap-16">
+          <div {...REVEAL_ITEM} className="lg:col-span-5">
             <SectionHeading
               id="credentials-title"
               content={{ eyebrow: content.eyebrow, title: content.title }}
@@ -80,7 +86,11 @@ export function CredentialsSection({ content = credentialsContent }: Credentials
               {content.foundations.map((foundation) => {
                 const Icon = foundationIcons[foundation.icon];
                 return (
-                  <li key={foundation.id} className="rounded-xs border bg-background p-4 md:p-6">
+                  <li
+                    {...REVEAL_ITEM}
+                    key={foundation.id}
+                    className="rounded-xs border bg-background p-4 md:p-6"
+                  >
                     <div className="mb-3 flex items-start gap-2">
                       <Icon aria-hidden="true" className="mt-0.75 size-4.5 shrink-0 text-brand" />
                       <h3 className="text-headline-sm font-semibold text-foreground">
@@ -127,9 +137,9 @@ export function CredentialsSection({ content = credentialsContent }: Credentials
               </div>
             ) : null}
           </div>
-        </div>
+        </RevealGroup>
 
-        <div className="mt-10 flex flex-col items-center gap-8 rounded-xs border bg-muted p-6 text-center sm:p-10 lg:mt-16 lg:flex-row lg:justify-between lg:gap-10 lg:p-16 lg:text-left">
+        <FadeIn className="mt-10 flex flex-col items-center gap-8 rounded-xs border bg-muted p-6 text-center sm:p-10 lg:mt-16 lg:flex-row lg:justify-between lg:gap-10 lg:p-16 lg:text-left">
           <div className="max-w-2xl space-y-4">
             <p className="inline-flex items-center gap-2 text-label-sm font-semibold tracking-wider text-brand uppercase">
               <span aria-hidden="true" className="size-2 rounded-full bg-brand" />
@@ -205,7 +215,7 @@ export function CredentialsSection({ content = credentialsContent }: Credentials
               </ul>
             ) : null}
           </div>
-        </div>
+        </FadeIn>
       </Container>
     </section>
   );

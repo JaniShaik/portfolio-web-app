@@ -3,64 +3,16 @@ import { hydrateRoot } from "react-dom/client";
 import { renderToString } from "react-dom/server";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { FadeIn } from "@/components/animations/fade-in";
-
-type ObserverEntry = { callback: IntersectionObserverCallback; elements: Set<Element> };
-const observers: ObserverEntry[] = [];
-
-class MockIntersectionObserver {
-  private entry: ObserverEntry;
-  constructor(callback: IntersectionObserverCallback) {
-    this.entry = { callback, elements: new Set() };
-    observers.push(this.entry);
-  }
-  observe(element: Element) {
-    this.entry.elements.add(element);
-  }
-  unobserve(element: Element) {
-    this.entry.elements.delete(element);
-  }
-  disconnect() {
-    this.entry.elements.clear();
-  }
-  takeRecords() {
-    return [];
-  }
-}
-
-function scrollIntoView(element: Element) {
-  for (const { callback, elements } of observers) {
-    if (!elements.has(element)) continue;
-    const entry = { isIntersecting: true, target: element } as IntersectionObserverEntry;
-    callback([entry], {} as IntersectionObserver);
-  }
-}
-
-function mockReducedMotion(reduce: boolean) {
-  vi.stubGlobal(
-    "matchMedia",
-    vi.fn((query: string) => ({
-      matches: reduce && query.includes("reduce"),
-      media: query,
-      addEventListener: vi.fn(),
-      removeEventListener: vi.fn(),
-      addListener: vi.fn(),
-      removeListener: vi.fn(),
-      onchange: null,
-      dispatchEvent: vi.fn(),
-    })),
-  );
-}
-
-function placeBelowFold() {
-  vi.spyOn(Element.prototype, "getBoundingClientRect").mockReturnValue({
-    top: window.innerHeight + 500,
-  } as DOMRect);
-}
+import {
+  installIntersectionObserver,
+  mockReducedMotion,
+  placeBelowFold,
+  scrollIntoView,
+} from "../../helpers/motion";
 
 describe("FadeIn", () => {
   beforeEach(() => {
-    observers.length = 0;
-    vi.stubGlobal("IntersectionObserver", MockIntersectionObserver);
+    installIntersectionObserver();
     mockReducedMotion(false);
   });
 

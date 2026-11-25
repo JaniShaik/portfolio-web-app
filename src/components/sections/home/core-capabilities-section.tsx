@@ -7,6 +7,8 @@ import {
   ShieldCheckIcon,
   WorkflowIcon,
 } from "lucide-react";
+import { RevealGroup } from "@/components/animations/reveal-group";
+import { REVEAL_ITEM } from "@/components/animations/reveal-item";
 import { Container } from "@/components/shared/container";
 import { coreCapabilitiesContent } from "@/data/core-capabilities";
 import type { CapabilityIcon, CoreCapabilitiesContent } from "@/types";
@@ -39,47 +41,52 @@ export function CoreCapabilitiesSection({
       className="scroll-mt-20 border-t bg-muted section-spacing"
     >
       <Container>
-        <SectionHeading id="core-capabilities-title" content={content} />
-        <ul className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
-          {content.items.map((capability, index) => {
-            const Icon = capabilityIcons[capability.icon];
-            return (
-              <li
-                key={capability.id}
-                className="flex flex-col justify-between rounded-xs border bg-background p-4 md:p-7"
-              >
-                <div>
-                  <div className="mb-2 flex items-center justify-between md:mb-5">
-                    <span className="font-mono text-label-sm text-muted-foreground">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <Icon aria-hidden="true" className="hidden size-5 text-brand md:block" />
-                  </div>
-                  <h3 className="mb-1 text-headline-sm font-semibold text-foreground md:mb-3">
-                    {capability.title}
-                  </h3>
-                  <p className="text-body-sm leading-relaxed text-muted-foreground md:mb-6">
-                    {capability.description}
-                  </p>
-                </div>
-                <ul
-                  aria-label={`${capability.title} technologies`}
-                  className="hidden flex-wrap gap-1.5 border-t pt-4 md:flex"
+        <RevealGroup>
+          <div {...REVEAL_ITEM}>
+            <SectionHeading id="core-capabilities-title" content={content} />
+          </div>
+          <ul className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
+            {content.items.map((capability, index) => {
+              const Icon = capabilityIcons[capability.icon];
+              return (
+                <li
+                  {...REVEAL_ITEM}
+                  key={capability.id}
+                  className="flex flex-col justify-between rounded-xs border bg-background p-4 md:p-7"
                 >
-                  {/* Static, never reordered and stateless: the index is a stable key. */}
-                  {capability.tags.map((tag, tagIndex) => (
-                    <li
-                      key={tagIndex}
-                      className="rounded-xs border bg-muted px-2 py-0.5 text-label-sm text-muted-foreground"
-                    >
-                      {tag}
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            );
-          })}
-        </ul>
+                  <div>
+                    <div className="mb-2 flex items-center justify-between md:mb-5">
+                      <span className="font-mono text-label-sm text-muted-foreground">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <Icon aria-hidden="true" className="hidden size-5 text-brand md:block" />
+                    </div>
+                    <h3 className="mb-1 text-headline-sm font-semibold text-foreground md:mb-3">
+                      {capability.title}
+                    </h3>
+                    <p className="text-body-sm leading-relaxed text-muted-foreground md:mb-6">
+                      {capability.description}
+                    </p>
+                  </div>
+                  <ul
+                    aria-label={`${capability.title} technologies`}
+                    className="hidden flex-wrap gap-1.5 border-t pt-4 md:flex"
+                  >
+                    {/* Static, never reordered and stateless: the index is a stable key. */}
+                    {capability.tags.map((tag, tagIndex) => (
+                      <li
+                        key={tagIndex}
+                        className="rounded-xs border bg-muted px-2 py-0.5 text-label-sm text-muted-foreground"
+                      >
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              );
+            })}
+          </ul>
+        </RevealGroup>
       </Container>
     </section>
   );

@@ -81,6 +81,26 @@
   --text-label-sm--line-height: 0.875rem;
   --text-label-sm--letter-spacing: 0.04em;
   --text-label-sm--font-weight: 500;
+
+  /* Motion. Entrance animations run once on first paint; pair with `motion-safe:` and set
+   * stagger with `delay-*`. `both` fill keeps elements hidden during their delay. */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-fade-up: fade-up 0.6s var(--ease-out-expo) both;
+  --animate-fade-in-left: fade-in-left 0.8s var(--ease-out-expo) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+  }
+
+  @keyframes fade-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(1.5rem);
+    }
+  }
 }
 
 @theme inline {
@@ -233,6 +253,12 @@
       @apply scroll-auto;
     }
   }
+}
+
+/* Stagger for entrance animations without touching transition-delay (so hover stays instant).
+ * Usage: motion-safe:animation-delay-120 */
+@utility animation-delay-* {
+  animation-delay: calc(--value(integer) * 1ms);
 }
 
 /* Keyboard focus indicator for text links and icon links (cobalt outline). */
